@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>5인 미만 사업장 전용 퇴직금 및 실업급여 계산기 | 연차수당 제외 완벽 반영</title>
+    <meta name="description" content="식당, 카페, 미용실 등 5인 미만 영세 사업장 근로자를 위한 맞춤형 퇴직금 및 실업급여 계산기. 헷갈리는 연차수당 미적용, 가산수당 제외 기준을 완벽하게 반영하여 정확하게 계산해드립니다.">
+    <meta name="keywords" content="5인 미만 퇴직금, 5인 미만 실업급여, 식당 퇴직금, 알바 퇴직금, 퇴직금 계산기, 실업급여 계산기">
+    <link rel="canonical" href="https://smallbiz.enjoy-onepage.com/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="5인 미만 사업장 전용 퇴직금/실업급여 계산기">
+    <meta property="og:description" content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요.">
+    <meta property="og:url" content="https://smallbiz.enjoy-onepage.com/">
+    <meta property="og:type" content="website">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "5인 미만 사업장 퇴직금/실업급여 계산기",
+      "url": "https://smallbiz.enjoy-onepage.com/",
+      "description": "5인 미만 영세 사업장 근로자를 위한 맞춤형 퇴직금 및 실업급여 계산기. 헷갈리는 연차수당 미적용 등을 반영합니다.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All"
+    }
+    </script>
+    
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js" integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0W/3Ith/aP28h2XznbnQhTtcW76S6Gv2Z/E3Q" crossorigin="anonymous"></script>
+    <!-- 카카오 앱키 (나중에 변경 필요) -->
+    <script>const KAKAO_APP_KEY = 'YOUR_KAKAO_KEY_HERE';</script>
+
+    <style>
+        :root {
+            --primary: #00796B;
+            --primary-light: #E0F2F1;
+            --secondary: #009688;
+            --bg: #F4F6F8;
+            --text: #2C3E50;
+            --light: #7F8C8D;
+            --border: #E0E6ED;
+            --box: #FFFFFF;
+            --highlight: #FF9800;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 75px; /* Sticky ad space */
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 500px;
+            width: 100%;
+            min-height: 100vh;
+            background: var(--box);
+            padding: 20px 20px 40px;
+            box-shadow: 0 0 20px rgba(0, 121, 107, 0.08);
+        }
+
+        .header { text-align: center; margin-bottom: 25px; padding-top: 10px; }
+        .header h1 { font-size: 1.45rem; margin: 0 0 8px; color: var(--text); line-height: 1.3; word-break: keep-all; }
+        .header p { font-size: 0.85rem; color: var(--light); margin: 0; line-height: 1.5; word-break: keep-all; }
+        .badge { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; }
+
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+        .input-wrapper { position: relative; }
+        .input-wrapper input, .input-wrapper select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #FAFAFC;
+            transition: border-color 0.2s;
+        }
+        .input-wrapper input:focus, .input-wrapper select:focus {
+            outline: none; border-color: var(--primary); background: #fff;
+        }
+        .date-row { display: flex; gap: 10px; }
+        .date-row > div { flex: 1; }
+        .help-text { font-size: 0.75rem; color: var(--light); margin-top: 5px; margin-bottom: 0; }
+
+        .btn-calc {
+            width: 100%; padding: 16px; background: var(--primary); color: #fff; border: none;
+            border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 121, 107, 0.2); transition: transform 0.1s, background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-calc:active { transform: scale(0.98); }
+
+        .result-box {
+            display: none; background: #fff; border: 2px solid var(--primary); border-radius: 16px;
+            padding: 24px; margin-top: 25px; box-shadow: 0 10px 30px rgba(0, 121, 107, 0.1);
+        }
+        .result-box.active { display: block; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .res-header { text-align: center; margin-bottom: 20px; }
+        .res-header h2 { margin: 0; font-size: 1.2rem; color: var(--primary); }
+        .res-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--border); }
+        .res-row:last-child { border-bottom: none; }
+        .res-label { font-size: 0.9rem; color: var(--light); font-weight: 500; }
+        .res-val { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+        .val-highlight { color: var(--highlight); font-size: 1.4rem; }
+
+        .alert-box { background: var(--primary-light); padding: 14px; border-radius: 10px; margin-top: 20px; font-size: 0.82rem; line-height: 1.6; color: var(--text); }
+        .alert-box strong { color: var(--primary); }
+
+        .ad-box { width: 100%; min-height: 90px; margin: 20px 0; background: var(--box); text-align: center; overflow: hidden; border-radius: 12px; }
+        .sticky-ad { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; max-height: 60px; overflow: hidden; background: #fff; border-top: 1px solid #e0e0e0; z-index: 9999; text-align: center; }
+
+        .action-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .action-btns button { flex: 1; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        .btn-share { background: #FEE500; color: #000; }
+        .btn-reset { background: var(--bg); color: var(--light); border: 1px solid var(--border); }
+
+        .guides-section { display: none; margin-top: 30px; }
+        .guides-section h3 { font-size: 1.1rem; margin-bottom: 15px; }
+        .guide-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .g-card { padding: 16px; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: 12px; transition: transform 0.2s; }
+        .g-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+        .g-card-icon { font-size: 1.5rem; }
+        .g-card-text h4 { margin: 0 0 4px; font-size: 0.95rem; }
+        .g-card-text p { margin: 0; font-size: 0.75rem; color: var(--light); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="badge">5인 미만 사업장 전용</div>
+        <h1>퇴직금 및 실업급여 계산기</h1>
+        <p>복잡한 연차수당 미적용 규정을 완벽 반영하여<br>내 권리를 정확하게 계산해드립니다.</p>
+    </div>
+
+    <!-- 입력 폼 -->
+    <div class="date-row">
+        <div class="input-group">
+            <label>입사일</label>
+            <div class="input-wrapper">
+                <input type="date" id="joinDate">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>퇴사일(마지막 근무일)</label>
+            <div class="input-wrapper">
+                <input type="date" id="leaveDate">
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>퇴직 전 3개월 평균 월급(세전)</label>
+        <div class="input-wrapper">
+            <input type="number" id="monthlySalary" placeholder="예: 2500000">
+        </div>
+        <p class="help-text">기본급과 고정수당만 포함하세요. (5인 미만은 연차미사용수당 제외)</p>
+    </div>
+
+    <div class="date-row">
+        <div class="input-group">
+            <label>퇴사 시 만 나이</label>
+            <div class="input-wrapper">
+                <input type="number" id="age" placeholder="예: 28">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>고용보험 가입기간</label>
+            <div class="input-wrapper">
+                <select id="insPeriod">
+                    <option value="under1">1년 미만 (또는 미가입)</option>
+                    <option value="1to3" selected>1년 이상 ~ 3년 미만</option>
+                    <option value="3to5">3년 이상 ~ 5년 미만</option>
+                    <option value="5to10">5년 이상 ~ 10년 미만</option>
+                    <option value="over10">10년 이상</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-calc" onclick="calculateAll()">내 예상 금액 확인하기</button>
+
+    <!-- 결과 화면 바로 아래 광고 (5970111542) -->
+    <div class="ad-box" id="result-ad-box" style="display:none;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="5970111542" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 결과 박스 -->
+    <div class="result-box" id="resultBox">
+        <div class="res-header">
+            <h2>💰 예상 지급액 계산 결과</h2>
+        </div>
+        <div class="res-row">
+            <span class="res-label">총 재직 일수</span>
+            <span class="res-val" id="resDays">0일</span>
+        </div>
+        <div class="res-row">
+            <span class="res-label">예상 퇴직금 (세전)</span>
+            <span class="res-val val-highlight" id="resSeverance">0원</span>
+        </div>
+        <div class="res-row">
+            <span class="res-label">예상 1일 실업급여액</span>
+            <span class="res-val" id="resDailyUnemp">0원</span>
+        </div>
+        <div class="res-row">
+            <span class="res-label">실업급여 지급 일수</span>
+            <span class="res-val" id="resUnempDays">0일</span>
+        </div>
+        <div class="res-row" style="background:#FFF3E0; padding:15px; border-radius:10px; margin-top:10px; border-bottom:none;">
+            <span class="res-label" style="color:#E65100; font-weight:bold;">총 예상 실업급여</span>
+            <span class="res-val val-highlight" id="resTotalUnemp" style="color:#E65100;">0원</span>
+        </div>
+
+        <div class="alert-box">
+            <strong>⚠️ 5인 미만 사업장 핵심 체크!</strong><br>
+            • 5인 미만이라도 주 15시간 이상, 1년 이상 근무했다면 <strong>퇴직금은 100% 의무 지급</strong> 대상입니다.<br>
+            • 5인 미만은 연차 의무가 없으므로 <strong>연차수당이 퇴직금 산정에 포함되지 않습니다.</strong><br>
+            • 본 계산은 모의 계산으로 실제 수령액과 약간의 오차가 있을 수 있습니다.
+        </div>
+
+        <div class="action-btns">
+            <button class="btn-share" onclick="shareKakao()">카카오톡 결과 공유</button>
+            <button class="btn-reset" onclick="resetForm()">다시 계산</button>
+        </div>
+    </div>
+
+    <!-- 5인 미만 노무 가이드 섹션 -->
+    <div class="guides-section" id="guidesSection">
+        <h3>📚 5인 미만 사업장 필수 상식</h3>
+        <div class="guide-cards">
+            <a href="guides/severance-pay.html" class="g-card">
+                <div class="g-card-icon">💼</div>
+                <div class="g-card-text">
+                    <h4>5인 미만도 퇴직금 무조건 받나요?</h4>
+                    <p>주 15시간, 1년 이상 근무 요건 총정리</p>
+                </div>
+            </a>
+            <a href="guides/annual-leave.html" class="g-card">
+                <div class="g-card-text">
+                    <h4>연차 휴가와 수당, 진짜 안 줘도 될까?</h4>
+                    <p>5인 미만 연차 규정 및 합의 방법</p>
+                </div>
+            </a>
+            <a href="guides/unemployment.html" class="g-card">
+                <div class="g-card-icon">💸</div>
+                <div class="g-card-text">
+                    <h4>자진 퇴사해도 실업급여 받는 예외 조건</h4>
+                    <p>임금체불, 휴업 등 예외 꿀팁</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 페이지 맨 하단용 광고 (1033529962) -->
+    <div class="ad-box" style="margin-top: 40px;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="1033529962" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+</div>
+
+<!-- 하단 Sticky 고정용 광고 (7390065079 - horizontal 강제 적용) -->
+<div class="sticky-ad">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle" style="display:block;width:100%;height:60px;" data-ad-client="ca-pub-2228289204702106" data-ad-slot="7390065079" data-ad-format="horizontal" data-full-width-responsive="false"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<script>
+    // 카카오 SDK 초기화
+    if(KAKAO_APP_KEY !== 'YOUR_KAKAO_KEY_HERE') {
+        try { Kakao.init(KAKAO_APP_KEY); } catch(e) {}
+    }
+
+    // 초기값 셋팅
+    document.addEventListener('DOMContentLoaded', () => {
+        const today = new Date();
+        document.getElementById('leaveDate').valueAsDate = today;
+        const lastYear = new Date();
+        lastYear.setFullYear(today.getFullYear() - 1);
+        document.getElementById('joinDate').valueAsDate = lastYear;
+
+        // Load saved data
+        const saved = JSON.parse(localStorage.getItem('smallBizData') || '{}');
+        if(saved.monthlySalary) document.getElementById('monthlySalary').value = saved.monthlySalary;
+        if(saved.age) document.getElementById('age').value = saved.age;
+        if(saved.insPeriod) document.getElementById('insPeriod').value = saved.insPeriod;
+    });
+
+    function calculateAll() {
+        const join = new Date(document.getElementById('joinDate').value);
+        const leave = new Date(document.getElementById('leaveDate').value);
+        const monthly = parseInt(document.getElementById('monthlySalary').value) || 0;
+        const age = parseInt(document.getElementById('age').value) || 0;
+        const insPeriod = document.getElementById('insPeriod').value;
+
+        if(!join || !leave || join >= leave) { alert("입사일과 퇴사일을 올바르게 입력해주세요."); return; }
+        if(monthly < 500000) { alert("세전 월급을 정확히 입력해주세요."); return; }
+
+        // 저장
+        localStorage.setItem('smallBizData', JSON.stringify({ monthlySalary: monthly, age: age, insPeriod: insPeriod }));
+
+        // 1. 재직일수 계산
+        const diffTime = Math.abs(leave - join);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        document.getElementById('resDays').innerText = diffDays.toLocaleString() + "일";
+
+        // 2. 퇴직금 계산 (5인 미만 특례: 연차수당 미포함, 2013년 이후 100% 지급)
+        // 아주 단순화된 공식: (월급 * 3 / 91.25) * 30 * (재직일수 / 365)
+        let severance = 0;
+        if (diffDays >= 365) {
+            const avgDailyWage = (monthly * 3) / 91.25;
+            severance = avgDailyWage * 30 * (diffDays / 365);
+        }
+        document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원";
+
+        // 3. 실업급여 계산 (최신 2024/2025 기준 하한액 적용)
+        // 하한액: 63,104원, 상한액: 66,000원
+        let dailyUnemp = 0;
+        let unempDays = 0;
+        let totalUnemp = 0;
+
+        if (insPeriod !== "under1") {
+            // 평균임금의 60%
+            const avgDailyWage2 = (monthly * 3) / 91.25;
+            dailyUnemp = avgDailyWage2 * 0.6;
+            if (dailyUnemp < 63104) dailyUnemp = 63104;
+            if (dailyUnemp > 66000) dailyUnemp = 66000;
+
+            // 소정급여일수 표 (단순화 버전)
+            if (insPeriod === "1to3") unempDays = 150;
+            else if (insPeriod === "3to5") unempDays = 180;
+            else if (insPeriod === "5to10") unempDays = (age >= 50) ? 240 : 210;
+            else if (insPeriod === "over10") unempDays = (age >= 50) ? 270 : 240;
+
+            totalUnemp = dailyUnemp * unempDays;
+            
+            document.getElementById('resDailyUnemp').innerText = Math.floor(dailyUnemp).toLocaleString() + "원";
+            document.getElementById('resUnempDays').innerText = unempDays + "일";
+            document.getElementById('resTotalUnemp').innerText = Math.floor(totalUnemp).toLocaleString() + "원";
+        } else {
+            document.getElementById('resDailyUnemp').innerText = "해당 없음";
+            document.getElementById('resUnempDays').innerText = "고용보험 180일 미만";
+            document.getElementById('resTotalUnemp').innerText = "0원";
+        }
+
+        // 화면 표시
+        document.getElementById('resultBox').classList.add('active');
+        document.getElementById('result-ad-box').style.display = 'block';
+        document.getElementById('guidesSection').style.display = 'block';
+        
+        // 스크롤 이동
+        setTimeout(() => { document.getElementById('resultBox').scrollIntoView({behavior: 'smooth', block: 'center'}); }, 100);
+    }
+
+    function shareKakao() {
+        if(KAKAO_APP_KEY === 'YOUR_KAKAO_KEY_HERE') {
+            alert('카카오 공유 기능이 곧 업데이트 될 예정입니다!');
+            return;
+        }
+        const sev = document.getElementById('resSeverance').innerText;
+        Kakao.Share.sendDefault({
+            objectType: 'text',
+            text: `[5인 미만 사업장 전용 계산기]\n나의 예상 퇴직금은?\n👉 ${sev}`,
+            link: { mobileWebUrl: window.location.href, webUrl: window.location.href },
+            buttonTitle: '내 퇴직금 직접 계산해보기'
+        });
+    }
+
+    function resetForm() {
+        document.getElementById('resultBox').classList.remove('active');
+        document.getElementById('result-ad-box').style.display = 'none';
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
+</body>
+</html>

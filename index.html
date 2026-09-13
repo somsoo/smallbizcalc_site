@@ -336,14 +336,27 @@
     });
 
     function calculateAll() {
-        const join = new Date(document.getElementById('joinDate').value);
-        const leave = new Date(document.getElementById('leaveDate').value);
+        const joinVal = document.getElementById('joinDate').value;
+        const leaveVal = document.getElementById('leaveDate').value;
+        if(!joinVal || !leaveVal) {
+            alert("입사일과 퇴사일을 모두 입력해주세요.");
+            return;
+        }
+
+        const join = new Date(joinVal);
+        const leave = new Date(leaveVal);
         const monthly = parseInt(document.getElementById('monthlySalary').value) || 0;
         const age = parseInt(document.getElementById('age').value) || 0;
         const insPeriod = document.getElementById('insPeriod').value;
 
-        if(!join || !leave || join >= leave) { alert("입사일과 퇴사일을 올바르게 입력해주세요."); return; }
-        if(monthly < 500000) { alert("세전 월급을 정확히 입력해주세요."); return; }
+        if(isNaN(join.getTime()) || isNaN(leave.getTime()) || join >= leave) { 
+            alert("입사일과 퇴사일을 올바르게 입력해주세요 (퇴사일이 입사일 이후여야 합니다)."); 
+            return; 
+        }
+        if(monthly <= 0) { 
+            alert("세전 월급을 0원보다 크게 입력해주세요."); 
+            return; 
+        }
 
         // 저장
         localStorage.setItem('smallBizData', JSON.stringify({ monthlySalary: monthly, age: age, insPeriod: insPeriod }));
@@ -354,7 +367,6 @@
         document.getElementById('resDays').innerText = diffDays.toLocaleString() + "일";
 
         // 2. 퇴직금 계산 (5인 미만 특례: 연차수당 미포함, 2013년 이후 100% 지급)
-        // 아주 단순화된 공식: (월급 * 3 / 91.25) * 30 * (재직일수 / 365)
         let severance = 0;
         if (diffDays >= 365) {
             const avgDailyWage = (monthly * 3) / 91.25;
@@ -362,20 +374,20 @@
         }
         document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원";
 
-        // 3. 실업급여 계산 (최신 2024/2025 기준 하한액 적용)
-        // 하한액: 63,104원, 상한액: 66,000원
+        // 3. 실업급여 계산 (2026년 고시 최신 기준 적용)
+        // 2026년 최저임금 10,320원 -> 하한액: 10,320 * 8h * 0.8 = 66,048원
+        // 2026년 법정 상한액: 68,100원
         let dailyUnemp = 0;
         let unempDays = 0;
         let totalUnemp = 0;
 
         if (insPeriod !== "under1") {
-            // 평균임금의 60%
             const avgDailyWage2 = (monthly * 3) / 91.25;
             dailyUnemp = avgDailyWage2 * 0.6;
-            if (dailyUnemp < 63104) dailyUnemp = 63104;
-            if (dailyUnemp > 66000) dailyUnemp = 66000;
+            if (dailyUnemp < 66048) dailyUnemp = 66048;
+            if (dailyUnemp > 68100) dailyUnemp = 68100;
 
-            // 소정급여일수 표 (단순화 버전)
+            // 소정급여일수 표 (5인 미만 근로자 포함 고용보험법 법정 기준)
             if (insPeriod === "1to3") unempDays = 150;
             else if (insPeriod === "3to5") unempDays = 180;
             else if (insPeriod === "5to10") unempDays = (age >= 50) ? 240 : 210;
@@ -392,11 +404,11 @@
             document.getElementById('resTotalUnemp').innerText = "0원";
         }
 
-        // 화면 표시
+        // 화면 표시 및 널 가드
         document.getElementById('resultBox').classList.add('active');
-    const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='none';
-        document.getElementById('result-ad-box').style.display = 'block';
-        document.getElementById('guidesSection').style.display = 'block';
+        const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='none';
+        const rad = document.getElementById('result-ad-box'); if(rad) rad.style.display = 'block';
+        const gs = document.getElementById('guidesSection'); if(gs) gs.style.display = 'block';
         
         // 스크롤 이동
         setTimeout(() => { document.getElementById('resultBox').scrollIntoView({behavior: 'smooth', block: 'center'}); }, 100);
@@ -433,8 +445,8 @@
 
     function resetForm() {
         document.getElementById('resultBox').classList.remove('active');
-    const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='block';
-        document.getElementById('result-ad-box').style.display = 'none';
+        const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='block';
+        const rad = document.getElementById('result-ad-box'); if(rad) rad.style.display = 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 </script>

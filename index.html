@@ -2,6 +2,11 @@
 
 <html lang="ko">
 <head>
+    <!-- Performance Optimization: Resource Preconnect -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <meta content="index, follow" name="robots"/>
@@ -169,6 +174,17 @@
         .g-card-icon { font-size: 1.5rem; }
         .g-card-text h4 { margin: 0 0 4px; font-size: 0.95rem; }
         .g-card-text p { margin: 0; font-size: 0.75rem; color: var(--light); }
+    
+        /* U3 Accessibility: Global Keyboard Focus Ring Standard */
+        :focus-visible {
+            outline: 2px solid #3b82f6 !important;
+            outline-offset: 2px !important;
+        }
+        input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+            outline: 2px solid #2563eb !important;
+            outline-offset: 1px !important;
+        }
+    
     </style>
 <link href="https://smallbiz.enjoy-onepage.com/rss.xml" rel="alternate" title="5인 미만 퇴직금/실업급여 계산기 | 연차 제외 RSS Feed" type="application/rss+xml"/>
 <link href="https://smallbiz.enjoy-onepage.com/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml"/>
@@ -212,20 +228,20 @@
 <div class="input-group">
 <label>입사일</label>
 <div class="input-wrapper">
-<input id="joinDate" type="date"/>
+<input id="joinDate" type="date" aria-label="Joindate" />
 </div>
 </div>
 <div class="input-group">
 <label>퇴사일(마지막 근무일)</label>
 <div class="input-wrapper">
-<input id="leaveDate" type="date"/>
+<input id="leaveDate" type="date" aria-label="Leavedate" />
 </div>
 </div>
 </div>
 <div class="input-group">
 <label>퇴직 전 3개월 평균 월급(세전)</label>
 <div class="input-wrapper">
-<input id="monthlySalary" placeholder="예: 2500000" type="number"/>
+<input id="monthlySalary" placeholder="예: 2500000" type="number" aria-label="예: 2500000" />
 </div>
 <p class="help-text">기본급과 고정수당만 포함하세요. (5인 미만은 연차미사용수당 제외)</p>
 </div>
@@ -233,13 +249,13 @@
 <div class="input-group">
 <label>퇴사 시 만 나이</label>
 <div class="input-wrapper">
-<input id="age" placeholder="예: 28" type="number"/>
+<input id="age" placeholder="예: 28" type="number" aria-label="예: 28" />
 </div>
 </div>
 <div class="input-group">
 <label>고용보험 가입기간</label>
 <div class="input-wrapper">
-<select id="insPeriod">
+<select id="insPeriod" aria-label="insPeriod">
 <option value="under1">1년 미만 (또는 미가입)</option>
 <option selected="" value="1to3">1년 이상 ~ 3년 미만</option>
 <option value="3to5">3년 이상 ~ 5년 미만</option>

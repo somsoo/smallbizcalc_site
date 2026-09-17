@@ -206,7 +206,17 @@
     overflow: hidden !important;
   }
 </style>
-<meta content="summary_large_image" name="twitter:card"/><meta content="5인 미만 사업장 전용 퇴직금/실업급여 계산기" name="twitter:title"/><meta content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요." name="twitter:description"/><meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/></head>
+<meta content="summary_large_image" name="twitter:card"/><meta content="5인 미만 사업장 전용 퇴직금/실업급여 계산기" name="twitter:title"/><meta content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요." name="twitter:description"/><meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/><style id="mobile-hardening-shield">
+  @media (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    button, [role="button"], a.btn {
+      min-height: 42px;
+    }
+  }
+</style>
+</head>
 <body>
 <!-- 상단 슬림 띠배너 (헤더 직하단: 50~60px 슬림형) -->
 <div class="manual-ad-box ad-top-banner" style="width: 100%; max-width: 960px; margin: 8px auto 16px; text-align: center;">
@@ -241,7 +251,7 @@
 <div class="input-group">
 <label>퇴직 전 3개월 평균 월급(세전)</label>
 <div class="input-wrapper">
-<input id="monthlySalary" placeholder="예: 2500000" type="number" aria-label="예: 2500000" />
+<input id="monthlySalary" placeholder="예: 2500000" type="number" min="0" aria-label="예: 2500000" />
 </div>
 <p class="help-text">기본급과 고정수당만 포함하세요. (5인 미만은 연차미사용수당 제외)</p>
 </div>
@@ -249,7 +259,7 @@
 <div class="input-group">
 <label>퇴사 시 만 나이</label>
 <div class="input-wrapper">
-<input id="age" placeholder="예: 28" type="number" aria-label="예: 28" />
+<input id="age" placeholder="예: 28" type="number" min="0" aria-label="예: 28" />
 </div>
 </div>
 <div class="input-group">

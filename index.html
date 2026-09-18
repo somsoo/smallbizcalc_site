@@ -207,6 +207,15 @@
   }
 </style>
 <meta content="summary_large_image" name="twitter:card"/><meta content="5인 미만 사업장 전용 퇴직금/실업급여 계산기" name="twitter:title"/><meta content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요." name="twitter:description"/><meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/><style id="mobile-hardening-shield">
+  /* 모바일 한글 단어 단위 줄바꿈 보존 & 버튼 텍스트 단일행 쉴드 */
+  body, h1, h2, h3, h4, p, span, label {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  button, [role="button"], a.btn {
+    white-space: nowrap;
+    word-break: keep-all;
+  }
   @media (max-width: 640px) {
     input, select, textarea {
       font-size: 16px !important;

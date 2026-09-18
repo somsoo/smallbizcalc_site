@@ -600,7 +600,6 @@
         // 화면 표시 및 널 가드
         document.getElementById('resultBox').classList.add('active');
         const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='none';
-        const rad = document.getElementById('result-ad-box'); if(rad) rad.style.display = 'block';
         const gs = document.getElementById('guidesSection'); if(gs) gs.style.display = 'block';
         
         // 스크롤 이동
@@ -639,7 +638,6 @@
     function resetForm() {
         document.getElementById('resultBox').classList.remove('active');
         const sp = document.getElementById('initialSmallBizPrompt'); if(sp) sp.style.display='block';
-        const rad = document.getElementById('result-ad-box'); if(rad) rad.style.display = 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 </script>

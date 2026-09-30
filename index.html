@@ -269,12 +269,14 @@
 <div class="input-wrapper">
 <input id="age" placeholder="예: 28" type="number" min="0" aria-label="예: 28" />
 </div>
+<label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:500;color:#4B5563;margin-top:6px;"><input id="disabledCheck" type="checkbox" /> 장애인 (50세 이상과 같은 일수 적용)</label>
 </div>
 <div class="input-group">
 <label>고용보험 가입기간</label>
 <div class="input-wrapper">
 <select id="insPeriod" aria-label="insPeriod">
-<option value="under1">1년 미만 (또는 미가입)</option>
+<option value="none">180일 미만 또는 미가입 (수급 대상 아님)</option>
+<option value="under1">1년 미만 (피보험 단위기간 180일 이상)</option>
 <option selected="" value="1to3">1년 이상 ~ 3년 미만</option>
 <option value="3to5">3년 이상 ~ 5년 미만</option>
 <option value="5to10">5년 이상 ~ 10년 미만</option>
@@ -314,7 +316,8 @@
 <div class="alert-box">
 <strong>⚠️ 5인 미만 사업장 핵심 체크!</strong><br/>
                     • 5인 미만이라도 주 15시간 이상, 1년 이상 근무했다면 <strong>퇴직금은 100% 의무 지급</strong> 대상입니다.<br/>
-                    • 5인 미만은 연차 의무가 없으므로 <strong>연차수당이 퇴직금 산정에 포함되지 않습니다.</strong>
+                    • 5인 미만은 연차 의무가 없으므로 <strong>연차수당이 퇴직금 산정에 포함되지 않습니다.</strong><br/>
+                    • 실업급여는 2026년 기준 1일 상한 68,100원·하한 66,048원(1일 8시간)이고, 받는 일수는 고용보험법 별표 1(장애인은 50세 이상과 같음)을 따릅니다. 실제 금액은 고용센터가 정합니다. (2026년 10월 확인)
 </div>
 <div class="action-btns py-3 min-h-[44px]">
 <button class="btn-share whitespace-nowrap py-3 min-h-[44px]" onclick="shareResult()">결과 공유하기</button>
@@ -364,7 +367,7 @@
 <h4 class="text-base font-bold text-slate-800 dark:text-slate-100 mb-1.5 flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-blue-500"></span>실업급여 수급 자격 동일
           </h4>
-<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">고용보험 가입기간 180일 이상 및 비자발적 퇴사 조건을 충족하면, 사업장 규모와 무관하게 고용센터를 통해 동일하게 실업급여가 지급됩니다.</p>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">고용보험 피보험 단위기간 180일 이상 및 비자발적 퇴사 조건을 충족하면, 사업장 규모와 무관하게 고용센터를 통해 동일하게 실업급여가 지급됩니다.</p>
 </div>
 </div>
 </div>
@@ -518,24 +521,29 @@
         }
         document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원";
 
-        // 3. 실업급여 계산 (2026년 고시 최신 기준 적용)
-        // 2026년 최저임금 10,320원 -> 하한액: 10,320 * 8h * 0.8 = 66,048원
-        // 2026년 법정 상한액: 68,100원
+        // 3. 실업급여 계산 (2026년 기준: 고용보험법 제45·46·50조, 시행령 제68조)
+        // 1일 상한: 기초일액 상한 113,500원(시행령 제68조, 2025. 12. 23. 개정) x 60% = 68,100원
+        // 1일 하한(8시간 기준): 최저임금 시간급 10,320원(고용노동부고시 제2025-47호) x 8시간 x 80% = 66,048원
+        // 소정급여일수: 고용보험법 별표 1 (시행 2026. 9. 18.) - 장애인은 50세 이상과 같은 일수
+        const UNEMP_DAYS = {
+            under50: { under1: 120, '1to3': 150, '3to5': 180, '5to10': 210, over10: 240 },
+            over50: { under1: 120, '1to3': 180, '3to5': 210, '5to10': 240, over10: 270 }
+        };
+        const disabledEl = document.getElementById('disabledCheck');
+        const disabled = disabledEl ? disabledEl.checked : false;
         let dailyUnemp = 0;
         let unempDays = 0;
         let totalUnemp = 0;
 
-        if (insPeriod !== "under1") {
+        if (insPeriod !== "none") {
             const avgDailyWage2 = (monthly * 3) / 91.25;
             dailyUnemp = avgDailyWage2 * 0.6;
-            if (dailyUnemp < 66048) dailyUnemp = 66048;
+            // 상한을 먼저 적용하고, 최저구직급여일액보다 낮으면 최저액 (법 제46조②: 최저액이 우선)
             if (dailyUnemp > 68100) dailyUnemp = 68100;
+            if (dailyUnemp < 66048) dailyUnemp = 66048;
 
-            // 소정급여일수 표 (5인 미만 근로자 포함 고용보험법 법정 기준)
-            if (insPeriod === "1to3") unempDays = 150;
-            else if (insPeriod === "3to5") unempDays = 180;
-            else if (insPeriod === "5to10") unempDays = (age >= 50) ? 240 : 210;
-            else if (insPeriod === "over10") unempDays = (age >= 50) ? 270 : 240;
+            const group = (age >= 50 || disabled) ? 'over50' : 'under50';
+            unempDays = UNEMP_DAYS[group][insPeriod] || 0;
 
             totalUnemp = dailyUnemp * unempDays;
             

@@ -315,7 +315,7 @@
 </div>
 <div class="alert-box">
 <strong>⚠️ 5인 미만 사업장 핵심 체크!</strong><br/>
-                    • 5인 미만이라도 주 15시간 이상, 1년 이상 근무했다면 <strong>퇴직금은 100% 의무 지급</strong> 대상입니다.<br/>
+                    • 5인 미만이라도 주 15시간 이상, 1년 이상 근무했다면 <strong>퇴직금은 100% 의무 지급</strong> 대상입니다(2013년 1월 1일 이후 근무분, 2010년 12월~2012년 12월 근무분은 50% 이상).<br/>
                     • 5인 미만은 연차 의무가 없으므로 <strong>연차수당이 퇴직금 산정에 포함되지 않습니다.</strong><br/>
                     • 실업급여는 2026년 기준 1일 상한 68,100원·하한 66,048원(1일 8시간)이고, 받는 일수는 고용보험법 별표 1(장애인은 50세 이상과 같음)을 따릅니다. 실제 금액은 고용센터가 정합니다. (2026년 10월 확인)
 </div>
@@ -513,13 +513,24 @@
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         document.getElementById('resDays').innerText = diffDays.toLocaleString() + "일";
 
-        // 2. 퇴직금 계산 (5인 미만 특례: 연차수당 미포함, 2013년 이후 100% 지급)
+        // 2. 퇴직금 (근로자퇴직급여 보장법 제8조①: 계속근로기간 1년에 30일분 이상의 평균임금, 제4조①: 1년 미만 제외)
+        //    상시 4명 이하 사업 특례 - 같은 법 부칙 제8조: 2010. 12. 1.부터 적용, 2010. 12. 1.~2012. 12. 31. 근무분은
+        //    100분의 50 이상, 2013. 1. 1. 이후 근무분은 100% (여기서는 법정 최저 수준으로 계산)
+        //    5인 미만은 연차유급휴가(근로기준법 제60조)가 적용되지 않아 연차수당을 넣지 않음
         let severance = 0;
+        let partial = false;
         if (diffDays >= 365) {
             const avgDailyWage = (monthly * 3) / 91.25;
-            severance = avgDailyWage * 30 * (diffDays / 365);
+            const DAY = 1000 * 60 * 60 * 24;
+            const from = join.getTime();
+            const to = leave.getTime() + DAY;
+            const span = (a, b) => Math.max(0, Math.min(to, b) - Math.max(from, a)) / DAY;
+            const halfDays = span(Date.UTC(2010, 11, 1), Date.UTC(2013, 0, 1));
+            const fullDays = span(Date.UTC(2013, 0, 1), Infinity);
+            partial = fullDays < diffDays;
+            severance = avgDailyWage * 30 * ((fullDays + halfDays * 0.5) / 365);
         }
-        document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원";
+        document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원" + (partial ? " (2013년 전 근무분 특례 반영)" : "");
 
         // 3. 실업급여 계산 (2026년 기준: 고용보험법 제45·46·50조, 시행령 제68조)
         // 1일 상한: 기초일액 상한 113,500원(시행령 제68조, 2025. 12. 23. 개정) x 60% = 68,100원

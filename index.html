@@ -9,7 +9,7 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="index, follow" name="robots"/>
-<title>5인 미만 퇴직금/실업급여 계산기 | 연차 제외</title>
+<title>5인 미만 퇴직금·실업급여 계산기 | 법정 기준</title>
 <link href="favicon.ico" rel="icon"/>
 <meta content="https://smallbiz.enjoy-onepage.com/og-image.png" property="og:image"/>
   <meta property="og:locale" content="ko_KR">
@@ -530,7 +530,7 @@
         // 1. 재직일수 계산
         const diffTime = Math.abs(leave - join);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-        document.getElementById('resDays').innerText = diffDays.toLocaleString() + "일";
+        document.getElementById('resDays').textContent = diffDays.toLocaleString() + "일";
 
         // 2. 퇴직금 (근로자퇴직급여 보장법 제8조①: 계속근로기간 1년에 30일분 이상의 평균임금, 제4조①: 1년 미만 제외)
         //    상시 4명 이하 사업 특례 - 같은 법 부칙 제8조: 2010. 12. 1.부터 적용, 2010. 12. 1.~2012. 12. 31. 근무분은
@@ -549,7 +549,7 @@
             partial = fullDays < diffDays;
             severance = avgDailyWage * 30 * ((fullDays + halfDays * 0.5) / 365);
         }
-        document.getElementById('resSeverance').innerText = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원" + (partial ? " (2013년 전 근무분 특례 반영)" : "");
+        document.getElementById('resSeverance').textContent = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원" + (partial ? " (2013년 전 근무분 특례 반영)" : "");
 
         // 3. 실업급여 계산 (2026년 기준: 고용보험법 제45·46·50조, 시행령 제68조)
         // 1일 상한: 기초일액 상한 113,500원(시행령 제68조, 2025. 12. 23. 개정) x 60% = 68,100원
@@ -577,13 +577,13 @@
 
             totalUnemp = dailyUnemp * unempDays;
             
-            document.getElementById('resDailyUnemp').innerText = Math.floor(dailyUnemp).toLocaleString() + "원";
-            document.getElementById('resUnempDays').innerText = unempDays + "일";
-            document.getElementById('resTotalUnemp').innerText = Math.floor(totalUnemp).toLocaleString() + "원";
+            document.getElementById('resDailyUnemp').textContent = Math.floor(dailyUnemp).toLocaleString() + "원";
+            document.getElementById('resUnempDays').textContent = unempDays + "일";
+            document.getElementById('resTotalUnemp').textContent = Math.floor(totalUnemp).toLocaleString() + "원";
         } else {
-            document.getElementById('resDailyUnemp').innerText = "해당 없음";
-            document.getElementById('resUnempDays').innerText = "고용보험 180일 미만";
-            document.getElementById('resTotalUnemp').innerText = "0원";
+            document.getElementById('resDailyUnemp').textContent = "해당 없음";
+            document.getElementById('resUnempDays').textContent = "고용보험 180일 미만";
+            document.getElementById('resTotalUnemp').textContent = "0원";
         }
 
         // 화면 표시 및 널 가드

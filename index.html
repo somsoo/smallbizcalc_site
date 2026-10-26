@@ -9,6 +9,7 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="index, follow" name="robots"/>
+<!-- PAGE:HEAD START -->
 <title>5인 미만 퇴직금·실업급여 계산기 | 법정 기준</title>
 <link href="favicon.ico" rel="icon"/>
 <meta content="https://smallbiz.enjoy-onepage.com/og-image.png" property="og:image"/>
@@ -75,6 +76,12 @@
   ]
 }
   </script>
+<!-- Twitter Card -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="5인 미만 사업장 전용 퇴직금/실업급여 계산기" name="twitter:title"/>
+<meta content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요." name="twitter:description"/>
+<meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/>
+<!-- PAGE:HEAD END -->
 <style>
         :root {
             --primary: #00796B;
@@ -184,6 +191,231 @@
             outline-offset: 1px !important;
         }
     
+        /* 5인 미만 사업장 레이아웃 및 서브페이지/공통 스타일 리모델링 */
+        .biz-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        @media (min-width: 900px) {
+            .biz-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                gap: 24px;
+                align-items: start;
+            }
+        }
+
+        .extra-section {
+            margin-top: 32px;
+            margin-bottom: 24px;
+        }
+        .extra-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .extra-card h3 {
+            margin: 0 0 14px;
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .extra-table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            text-align: center;
+        }
+        .extra-table th {
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+            padding: 8px 4px;
+            border: 1px solid #e2e8f0;
+            white-space: normal;
+            line-height: 1.25;
+            word-break: keep-all;
+        }
+        .extra-table td {
+            padding: 8px 4px;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+            word-break: break-all;
+            font-variant-numeric: tabular-nums;
+        }
+        .extra-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+        .extra-table tr.highlight-row td {
+            background: #e6fffa;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .checkpoints-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .checkpoint-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #334155;
+        }
+        .checkpoint-item:last-child {
+            margin-bottom: 0;
+        }
+        .checkpoint-icon {
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+
+        .sublinks-section {
+            margin-top: 36px;
+            margin-bottom: 28px;
+        }
+        .sublinks-section h3.section-title {
+            font-size: 1.15rem;
+            color: #1e293b;
+            margin: 0 0 16px;
+            font-weight: 800;
+            text-align: center;
+        }
+        .sublinks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            .sublinks-grid {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                gap: 20px;
+            }
+        }
+        .sublinks-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .sublinks-card h4 {
+            margin: 0 0 12px;
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 700;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+        .sublink-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sublink-item {
+            margin-bottom: 8px;
+        }
+        .sublink-item:last-child {
+            margin-bottom: 0;
+        }
+        .sublink-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #334155;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .sublink-item a:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .sublink-item a .arrow {
+            color: #94a3b8;
+            font-weight: bold;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+
+        /* 하단 가이드 및 아코디언 공통 정돈 스타일 */
+        .max-w-4xl { max-width: 960px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .my-12 { margin-top: 32px; margin-bottom: 32px; }
+        .my-8 { margin-top: 24px; margin-bottom: 24px; }
+        .my-6 { margin-top: 18px; margin-bottom: 18px; }
+        .px-4 { padding-left: 16px; padding-right: 16px; }
+        .rounded-2xl { border-radius: 16px; }
+        .rounded-xl { border-radius: 12px; }
+        .p-6 { padding: 20px; }
+        .p-4 { padding: 14px; }
+        .border { border-width: 1px; border-style: solid; border-color: #e2e8f0; }
+        .border-b { border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #e2e8f0; }
+        .bg-white { background-color: #ffffff; }
+        .bg-slate-50, .bg-gray-50 { background-color: #f8fafc; }
+        .text-slate-900, .text-gray-900 { color: #0f172a; }
+        .text-slate-800, .text-gray-800 { color: #1e293b; }
+        .text-slate-600, .text-gray-600 { color: #475569; }
+        .text-slate-500, .text-slate-400 { color: #64748b; }
+        .text-blue-600 { color: #2563eb; }
+        .text-emerald-600 { color: #059669; }
+        .font-black, .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-xl { font-size: 1.15rem; }
+        .text-base { font-size: 0.95rem; }
+        .text-sm { font-size: 0.85rem; }
+        .text-xs { font-size: 0.78rem; }
+        .leading-relaxed { line-height: 1.6; }
+        .gap-2 { gap: 8px; }
+        .gap-2\.5 { gap: 10px; }
+        .gap-3 { gap: 12px; }
+        .gap-3\.5 { gap: 14px; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .space-y-3 > * + * { margin-top: 12px; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .md\:grid-cols-3, .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (min-width: 900px) {
+            .biz-grid.biz-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                gap: 24px;
+                align-items: start;
+            }
+            .result-box {
+                margin-top: 0;
+            }
+        }
+        details summary { cursor: pointer; list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+        .max-w-4xl a { text-decoration: none; }
+        .bg-blue-600 { background-color: #2563eb; color: #ffffff !important; padding: 8px 14px; border-radius: 10px; white-space: nowrap; }
+        .mt-8.mb-8.space-y-3 { display: none; }
     </style>
 <link href="https://smallbiz.enjoy-onepage.com/rss.xml" rel="alternate" title="5인 미만 퇴직금/실업급여 계산기 | 연차 제외 RSS Feed" type="application/rss+xml"/>
 <link href="https://smallbiz.enjoy-onepage.com/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml"/>
@@ -205,7 +437,7 @@
     overflow: hidden !important;
   }
 </style>
-<meta content="summary_large_image" name="twitter:card"/><meta content="5인 미만 사업장 전용 퇴직금/실업급여 계산기" name="twitter:title"/><meta content="5인 미만 사업장만의 특수한 법적 기준(연차수당 제외 등)을 반영한 정확한 퇴직금과 실업급여를 10초만에 확인하세요." name="twitter:description"/><meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/><style id="mobile-hardening-shield">
+<style id="mobile-hardening-shield">
   /* 모바일 한글 단어 단위 줄바꿈 보존 & 버튼 텍스트 단일행 쉴드 */
   body, h1, h2, h3, h4, p, span, label {
     word-break: keep-all;
@@ -253,9 +485,11 @@
 <!-- 상단 슬림 띠배너 (헤더 직하단: 50~60px 슬림형) -->
 <div class="container">
 <div class="header">
+<!-- PAGE:HERO START -->
 <div class="badge">5인 미만 사업장 전용</div>
 <h1>퇴직금 및 실업급여 계산기</h1>
 <p>복잡한 연차수당 미적용 규정을 완벽 반영하여<br/>내 권리를 정확하게 계산해드립니다.</p>
+<!-- PAGE:HERO END -->
 </div>
 <div class="biz-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 <!-- Left Column: Input Form -->
@@ -351,6 +585,34 @@
 </div>
 </div>
 </div>
+<!-- PAGE:EXTRA START --><!-- PAGE:EXTRA END -->
+<!-- PAGE:SUBLINKS START -->
+<section class="sublinks-section">
+  <h3 class="section-title">💡 5인 미만 사업장 맞춤 상황별 계산표 &amp; 노무 가이드</h3>
+  <div class="sublinks-grid">
+    <div class="sublinks-card">
+      <h4>📊 5인 미만 근속연수·월급별 퇴직금 &amp; 실업급여 계산표</h4>
+      <ul class="sublink-list">
+        <li class="sublink-item"><a href="/tenure-1year.html"><span>1년 근속 퇴직금·실업급여 (월 250만 기준)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/tenure-2years.html"><span>2년 근속 퇴직금·실업급여 (월 270만 기준)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/tenure-3years.html"><span>3년 근속 퇴직금·실업급여 (월 300만 기준)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/tenure-5years.html"><span>5년 근속 퇴직금·실업급여 (월 320만 기준)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/wage-min-2026.html"><span>2026 최저임금 (월 2,156,880원) 정산표</span><span class="arrow">→</span></a></li>
+      </ul>
+    </div>
+    <div class="sublinks-card">
+      <h4>📌 5인 미만 특수 조건 &amp; 근로기준법 적용 가이드</h4>
+      <ul class="sublink-list">
+        <li class="sublink-item"><a href="/guide-under1-unemp.html"><span>1년 미만 퇴사자 실업급여 (180일 조건·120일)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/guide-over50-disabled.html"><span>50세 이상·장애인 우대 실업급여 (+30일)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/guide-parttime-15h.html"><span>주 15시간 이상 알바·단시간 퇴직금 기준</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/guide-no-annual-leave.html"><span>5인 미만 연차수당 제외 이유 (근로기준법 제60조)</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/guide-pre2013-rule.html"><span>2010~2012년 근무분 퇴직금 50% 특례 계산</span><span class="arrow">→</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- PAGE:SUBLINKS END -->
 <!-- 결과 화면 직하단 안전 광고 -->
 <!-- 5인 미만 노무 가이드 섹션 -->
 
@@ -396,18 +658,20 @@
 <span>❓</span> 자주 묻는 질문 (FAQ)
       </h4>
 <div class="space-y-3">
+<!-- PAGE:FAQ START -->
 <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-white dark:bg-slate-800">
 <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-sm mb-1">Q. 5인 미만 사업장도 퇴직금을 100% 지급해야 하나요?</h4>
-<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 네, 과거(2010~2012년) 유예 기간을 거쳐 2013년 1월 1일 이후 근로기간에 대해서는 5인 미만 사업장이라도 100% 법정 퇴직금을 전액 지급해야 합니다.</p>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 네, 2013년 1월 1일 이후부터는 5인 미만 사업장이라도 주 15시간 이상, 1년 이상 계속 근로한 근로자에게 법정 퇴직금 100%를 의무 지급해야 합니다.</p>
 </div>
 <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-white dark:bg-slate-800">
 <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-sm mb-1">Q. 5인 미만 사업장은 연차수당이 왜 퇴직금에 포함되지 않나요?</h4>
-<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 근로기준법 제11조 및 시행령에 따라 연차휴가 조항은 상시 5인 이상 사업장에만 적용됩니다. 법정 연차가 발생하지 않으므로 미사용 연차수당 정산 및 평균임금 가산 의무가 없습니다.</p>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 근로기준법상 연차유급휴가 규정(제60조)은 상시 5인 이상 사업장에만 적용됩니다. 따라서 5인 미만 사업장은 법정 연차가 발생하지 않아 퇴직금 산정 시 연차수당 가산 의무가 없습니다.</p>
 </div>
 <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-white dark:bg-slate-800">
 <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-sm mb-1">Q. 5인 미만 사업장 퇴사자도 실업급여를 받을 수 있나요?</h4>
-<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 네, 고용보험 피보험 단위기간 180일 이상 충족 및 경영악화 권고사직, 계약만료 등 비자발적 이직이라면 사업장 규모와 무관하게 고용센터 실업급여를 수급할 수 있습니다.</p>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">A. 네, 고용보험 피보험 단위기간이 180일 이상이고 권고사직이나 계약만료 등 비자발적 퇴사 사유라면 사업장 규모와 무관하게 동일한 실업급여를 수급할 수 있습니다.</p>
 </div>
+<!-- PAGE:FAQ END -->
 </div>
 </div>
 </div>
@@ -458,12 +722,12 @@
     <div class="flex items-center gap-3">
       <span class="text-2xl flex-shrink-0">🏪</span>
       <div class="text-left">
-        <div class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">소상공인 5인 미만 노무 가이드</div>
-        <div class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug">5인 미만 사업장 근로기준법 적용 범위 및 퇴직금·실업급여 기준</div>
+        <div class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">5인 이상 일반 사업장 퇴직금</div>
+        <div class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug">5인 이상 일반 사업장 퇴직금·DC/DB 비교 계산기 바로가기</div>
       </div>
     </div>
-    <a href="https://finance-kr.enjoy-onepage.com/2026/09/26/신용점수-산정-기준-변경/" target="_blank" rel="noopener noreferrer" class="shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition shadow-sm hover:shadow flex items-center gap-1.5">
-      <span>노무 가이드 읽기</span>
+    <a href="https://severance.enjoy-onepage.com/" target="_blank" rel="noopener noreferrer" class="shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition shadow-sm hover:shadow flex items-center gap-1.5">
+      <span>퇴직금 계산기 바로가기</span>
       <span>→</span>
     </a>
   </div>
@@ -488,17 +752,19 @@
 
     // 초기값 셋팅
     document.addEventListener('DOMContentLoaded', () => {
-        const today = new Date();
-        document.getElementById('leaveDate').valueAsDate = today;
-        const lastYear = new Date();
-        lastYear.setFullYear(today.getFullYear() - 1);
-        document.getElementById('joinDate').valueAsDate = lastYear;
+        if (!document.getElementById('leaveDate').getAttribute('value')) {
+            const today = new Date();
+            document.getElementById('leaveDate').valueAsDate = today;
+            const lastYear = new Date();
+            lastYear.setFullYear(today.getFullYear() - 1);
+            document.getElementById('joinDate').valueAsDate = lastYear;
 
-        // Load saved data
-        const saved = JSON.parse(localStorage.getItem('smallBizData') || '{}');
-        if(saved.monthlySalary) document.getElementById('monthlySalary').value = saved.monthlySalary;
-        if(saved.age) document.getElementById('age').value = saved.age;
-        if(saved.insPeriod) document.getElementById('insPeriod').value = saved.insPeriod;
+            // Load saved data
+            const saved = JSON.parse(localStorage.getItem('smallBizData') || '{}');
+            if(saved.monthlySalary) document.getElementById('monthlySalary').value = saved.monthlySalary;
+            if(saved.age) document.getElementById('age').value = saved.age;
+            if(saved.insPeriod) document.getElementById('insPeriod').value = saved.insPeriod;
+        }
     });
 
     function calculateAll() {

@@ -28,8 +28,7 @@
 <meta content="5인 미만 사업장에서 퇴사한 만 50세 이상 및 장애인 근로자의 우대 실업급여(+30일)와 퇴직금을 계산합니다." name="twitter:description"/>
 <meta content="https://smallbiz.enjoy-onepage.com/og-image.png" name="twitter:image"/>
 <!-- JSON-LD -->
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -57,7 +56,7 @@
           "name": "만 50세 이상 근로자는 실업급여 수급일수에서 어떤 우대를 받나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "고용보험법 제50조 별표 1에 따라 만 50세 이상 근로자는 피보험기간 구간별로 50세 미만 근로자보다 소정급여일수가 30일 더 길게 부여됩니다(1년 미만 제외)."
+            "text": "A. 고용보험법 제50조 별표 1에 따라 만 50세 이상 근로자는 피보험기간 구간별로 50세 미만 근로자보다 소정급여일수가 30일 더 길게 부여됩니다(1년 미만 제외)."
           }
         },
         {
@@ -65,7 +64,7 @@
           "name": "장애인 근로자의 실업급여 소정급여일수 적용 기준은 무엇인가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "장애인고용촉진 및 직업재활법상 장애인 근로자는 연령과 관계없이 고용보험법 별표 1 비고에 따라 '50세 이상'과 동일한 우대 소정급여일수(최대 270일)가 적용됩니다."
+            "text": "A. 장애인고용촉진 및 직업재활법상 장애인 근로자는 연령과 관계없이 고용보험법 별표 1 비고에 따라 '50세 이상'과 동일한 우대 소정급여일수(최대 270일)가 적용됩니다."
           }
         },
         {
@@ -73,14 +72,13 @@
           "name": "50세 이상 근로자의 5인 미만 사업장 퇴직금 산정 방식도 일반 근로자와 다른가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "아닙니다. 퇴직금 산정 공식은 연령과 무관하게 근로자퇴직급여 보장법 제8조에 따라 '평균임금 30일분 × (재직일수 / 365)'로 동일하게 계산됩니다."
+            "text": "A. 아닙니다. 퇴직금 산정 공식은 연령과 무관하게 근로자퇴직급여 보장법 제8조에 따라 '평균임금 30일분 × (재직일수 / 365)'로 동일하게 계산됩니다."
           }
         }
       ]
     }
   ]
-}
-  </script>
+}</script>
 <!-- PAGE:HEAD END -->
 <style>
         :root {
@@ -476,7 +474,7 @@
   .ad-bottom ins { min-height: 280px !important; }
 </style>
 <!-- KIRO:VALUES START -->
-<script type="application/json" id="kiro-values">{"app":"smallbizcalc_site","valid_until":"2026-12-31","soft_days":60,"hard_days":120,"grace_days":31,"status":"unverified","note":"이 페이지의 금액·비율은 2026년 기준","values":{}}</script>
+<script type="application/json" id="kiro-values">{"app":"smallbizcalc_site","checked":"2026-11-01","valid_until":"2027-12-31","soft_days":60,"hard_days":120,"grace_days":31,"status":"ok","note":"이 페이지의 금액은 지난해 최저임금 고시 기준","hide":["#resDailyUnemp","#resTotalUnemp",".extra-table"],"derived":{"max_daily":"=floor(base_cap*6/10)","min_daily8":"=round(min_wage*8*8/10)","min_daily4":"=round(min_wage*4*8/10)","raw280h8":"=2800000*3/91.25*6/10","pay280h8":"=max(min(raw280h8,max_daily),min_daily8)","raw260h8":"=2600000*3/91.25*6/10","pay260h8":"=max(min(raw260h8,max_daily),min_daily8)","raw120h4":"=1200000*3/91.25*6/10","pay120h4":"=max(min(raw120h4,max_daily),min_daily4)","raw300h8":"=3000000*3/91.25*6/10","pay300h8":"=max(min(raw300h8,max_daily),min_daily8)","raw250h8":"=2500000*3/91.25*6/10","pay250h8":"=max(min(raw250h8,max_daily),min_daily8)","raw270h8":"=2700000*3/91.25*6/10","pay270h8":"=max(min(raw270h8,max_daily),min_daily8)","raw320h8":"=3200000*3/91.25*6/10","pay320h8":"=max(min(raw320h8,max_daily),min_daily8)","rawmw":"=min_wage*209*3/91.25*6/10","paymw":"=max(min(rawmw,max_daily),min_daily8)"},"values":{"min_wage":10320,"mw_year":2026,"mw_no":"2025-47","base_cap":113500,"late_rate":20},"next":{"from":"2027-01-01","values":{"min_wage":10700,"mw_year":2027,"mw_no":"2026-60"}}}</script>
 <script>/* Kiro value guard v1 (2026-11-01). Values come from #kiro-values, written by the home server's value watcher.
    window.KIRO_V = values in force today (a scheduled "next" set applies from its date).
    Elements carrying data-v (value or =expression) and data-f (format) are re-rendered from those values;
@@ -548,6 +546,10 @@
     round: function (x, n) { var p = Math.pow(10, n || 0); return Math.floor(Math.abs(x) * p + 0.5) / p * (x < 0 ? -1 : 1); },
     floor: Math.floor, ceil: Math.ceil, min: Math.min, max: Math.max, abs: Math.abs
   };
+  try {
+    var dv = D.derived || {};
+    for (var dk in dv) if (own(dv, dk)) { var dx = ev(dv[dk]); if (dx !== undefined) V[dk] = dx; }
+  } catch (e) {}
   function ev(expr) {
     expr = String(expr || '');
     if (expr.charAt(0) !== '=') return lookup(expr);
@@ -562,6 +564,11 @@
     for (var i = 0; i < els.length; i++) {
       var t = F(ev(els[i].getAttribute('data-v')), els[i].getAttribute('data-f') || 'raw');
       if (t !== null && els[i].textContent !== t) els[i].textContent = t;
+    }
+    var sh = doc.querySelectorAll('kv-if[data-show]');
+    for (var k = 0; k < sh.length; k++) {
+      var x = ev(sh[k].getAttribute('data-show'));
+      if (x !== undefined) sh[k].hidden = !(x > 0);
     }
   }
   function notice() {
@@ -665,6 +672,20 @@
 </div>
 </div>
 </div>
+<div class="input-group">
+<label>하루 소정근로시간 (실업급여 하한액 기준)</label>
+<div class="input-wrapper">
+<select id="workHours" aria-label="workHours">
+<option value="8" selected="">8시간 이상 (전일제)</option>
+<option value="7">7시간</option>
+<option value="6">6시간</option>
+<option value="5">5시간</option>
+<option value="4">4시간</option>
+<option value="3">3시간</option>
+</select>
+</div>
+<p class="help-text">하한액 = 최저임금 × 하루 소정근로시간(8시간 한도) × 80% (고용보험법 제45조제4항·제46조)</p>
+</div>
 <button class="btn-calc whitespace-nowrap py-3 min-h-[44px]" onclick="calculateAll()">내 예상 금액 확인하기</button>
 </div>
 <!-- Right Column: Results & Initial Prompt -->
@@ -683,7 +704,7 @@
 </div>
 <div class="res-row">
 <span class="res-label">예상 1일 실업급여액</span>
-<span class="res-val" id="resDailyUnemp">66,048원</span>
+<span class="res-val" id="resDailyUnemp"><span data-v="=floor(pay260h8)" data-f="won">66,048원</span></span>
 </div>
 <div class="res-row">
 <span class="res-label">실업급여 지급 일수</span>
@@ -691,13 +712,13 @@
 </div>
 <div class="res-row" style="background:#FFF3E0; padding:15px; border-radius:10px; margin-top:10px; border-bottom:none;">
 <span class="res-label" style="color:#E65100; font-weight:bold;">총 예상 실업급여</span>
-<span class="res-val val-highlight" id="resTotalUnemp" style="color:#E65100;">13,870,080원</span>
+<span class="res-val val-highlight" id="resTotalUnemp" style="color:#E65100;"><span data-v="=floor(pay260h8*210)" data-f="won">13,870,080원</span></span>
 </div>
 <div class="alert-box">
 <strong>⚠️ 5인 미만 사업장 핵심 체크!</strong><br/>
                     • 5인 미만이라도 주 15시간 이상, 1년 이상 근무했다면 <strong>퇴직금은 100% 의무 지급</strong> 대상입니다(2013년 1월 1일 이후 근무분, 2010년 12월~2012년 12월 근무분은 50% 이상).<br/>
                     • 5인 미만은 연차 의무가 없으므로 <strong>연차수당이 퇴직금 산정에 포함되지 않습니다.</strong><br/>
-                    • 실업급여는 2026년 기준 1일 상한 68,100원·하한 66,048원(1일 8시간)이고, 받는 일수는 고용보험법 별표 1(장애인은 50세 이상과 같음)을 따릅니다. 실제 금액은 고용센터가 정합니다. (2026년 10월 확인)
+                    • 실업급여는 <span data-v="mw_year" data-f="raw">2026</span>년 기준 1일 상한 <span data-v="max_daily" data-f="won">68,100원</span>·하한 <span data-v="min_daily8" data-f="won">66,048원</span>(1일 8시간, 4시간이면 <span data-v="min_daily4" data-f="won">33,024원</span>)이고, 받는 일수는 고용보험법 별표 1(장애인은 50세 이상과 같음)을 따릅니다. <kv-if data-show="=min_daily8-max_daily" hidden>다만 지금은 1일 하한액(<span data-v="min_daily8" data-f="won">66,048원</span>, 8시간 기준)이 상한액(<span data-v="max_daily" data-f="won">68,100원</span>)보다 높아, 고용보험법 제46조제2항에 따라 하한액이 적용됩니다.</kv-if> 평균임금은 월급 × 3 ÷ 91.25일(3개월 평균 일수)로 어림했고, 실제 금액은 고용센터가 정합니다. (<span data-v="_checked" data-f="date">2026년 11월 1일</span> 확인)
 </div>
 <div class="action-btns py-3 min-h-[44px]">
 <button class="btn-share whitespace-nowrap py-3 min-h-[44px]" onclick="shareResult()">결과 공유하기</button>
@@ -717,7 +738,7 @@
   <div class="extra-card">
     <h3>📊 근속기간별 퇴직금 + 실업급여 합산 비교표 (월 260만 원 기준)</h3>
     <p style="font-size:0.78rem;color:#64748b;margin:0 0 12px;line-height:1.4;">
-      ※ 상시 5인 미만 사업장 연차수당 제외 기준이며, 금액 단위는 <strong>만 원</strong>입니다. 실업급여는 2026년 법정 기준(상한 68,100원·하한 66,048원)을 반영했습니다.
+      ※ 상시 5인 미만 사업장 연차수당 제외 기준이며, 금액 단위는 <strong>만 원</strong>입니다. 실업급여는 <span data-v="mw_year" data-f="raw">2026</span>년 법정 기준(상한 <span data-v="max_daily" data-f="won">68,100원</span>·하한 <span data-v="min_daily8" data-f="won">66,048원</span>, 1일 8시간)을 반영했습니다.
     </p>
     <div class="table-responsive">
       <table class="extra-table">
@@ -734,37 +755,37 @@
           <tr>
             <td style="font-weight:600;">1년(365일)</td>
             <td>256만</td>
-            <td>991만</td>
-            <td>1,189만</td>
-            <td style="font-weight:700;color:var(--primary);">1,247만</td>
+            <td><span data-v="=round(pay260h8*150/10000)" data-f="int">991</span>만</td>
+            <td><span data-v="=round(pay260h8*180/10000)" data-f="int">1,189</span>만</td>
+            <td style="font-weight:700;color:var(--primary);"><span data-v="=round((2600000*3/91.25*30*365/365+pay260h8*150)/10000)" data-f="int">1,247</span>만</td>
           </tr>
           <tr>
             <td style="font-weight:600;">2년(730일)</td>
             <td>513만</td>
-            <td>991만</td>
-            <td>1,189만</td>
-            <td style="font-weight:700;color:var(--primary);">1,504만</td>
+            <td><span data-v="=round(pay260h8*150/10000)" data-f="int">991</span>만</td>
+            <td><span data-v="=round(pay260h8*180/10000)" data-f="int">1,189</span>만</td>
+            <td style="font-weight:700;color:var(--primary);"><span data-v="=round((2600000*3/91.25*30*730/365+pay260h8*150)/10000)" data-f="int">1,504</span>만</td>
           </tr>
           <tr>
             <td style="font-weight:600;">3년(1,095일)</td>
             <td>769만</td>
-            <td>1,189만</td>
-            <td>1,387만</td>
-            <td style="font-weight:700;color:var(--primary);">1,958만</td>
+            <td><span data-v="=round(pay260h8*180/10000)" data-f="int">1,189</span>만</td>
+            <td><span data-v="=round(pay260h8*210/10000)" data-f="int">1,387</span>만</td>
+            <td style="font-weight:700;color:var(--primary);"><span data-v="=round((2600000*3/91.25*30*1095/365+pay260h8*180)/10000)" data-f="int">1,958</span>만</td>
           </tr>
           <tr>
             <td style="font-weight:600;">5년(1,825일)</td>
             <td>1,282만</td>
-            <td>1,387만</td>
-            <td>1,585만</td>
-            <td style="font-weight:700;color:var(--primary);">2,669만</td>
+            <td><span data-v="=round(pay260h8*210/10000)" data-f="int">1,387</span>만</td>
+            <td><span data-v="=round(pay260h8*240/10000)" data-f="int">1,585</span>만</td>
+            <td style="font-weight:700;color:var(--primary);"><span data-v="=round((2600000*3/91.25*30*1825/365+pay260h8*210)/10000)" data-f="int">2,669</span>만</td>
           </tr>
           <tr>
             <td style="font-weight:600;">10년(3,650일)</td>
             <td>2,564만</td>
-            <td>1,585만</td>
-            <td>1,783만</td>
-            <td style="font-weight:700;color:var(--primary);">4,150만</td>
+            <td><span data-v="=round(pay260h8*240/10000)" data-f="int">1,585</span>만</td>
+            <td><span data-v="=round(pay260h8*270/10000)" data-f="int">1,783</span>만</td>
+            <td style="font-weight:700;color:var(--primary);"><span data-v="=round((2600000*3/91.25*30*3650/365+pay260h8*240)/10000)" data-f="int">4,150</span>만</td>
           </tr>
         </tbody>
       </table>
@@ -808,7 +829,7 @@
         <li class="sublink-item"><a href="/tenure-2years.html"><span>2년 근속 퇴직금·실업급여 (월 270만 기준)</span><span class="arrow">→</span></a></li>
         <li class="sublink-item"><a href="/tenure-3years.html"><span>3년 근속 퇴직금·실업급여 (월 300만 기준)</span><span class="arrow">→</span></a></li>
         <li class="sublink-item"><a href="/tenure-5years.html"><span>5년 근속 퇴직금·실업급여 (월 320만 기준)</span><span class="arrow">→</span></a></li>
-        <li class="sublink-item"><a href="/wage-min-2026.html"><span>2026 최저임금 (월 2,156,880원) 정산표</span><span class="arrow">→</span></a></li>
+        <li class="sublink-item"><a href="/wage-min-2026.html"><span><span data-v="mw_year" data-f="raw">2026</span> 최저임금 (월 <span data-v="=min_wage*209" data-f="won">2,156,880원</span>) 정산표</span><span class="arrow">→</span></a></li>
       </ul>
     </div>
     <div class="sublinks-card">
@@ -1037,9 +1058,9 @@
         }
         document.getElementById('resSeverance').textContent = (diffDays < 365) ? "지급 대상 아님 (1년 미만)" : Math.floor(severance).toLocaleString() + "원" + (partial ? " (2013년 전 근무분 특례 반영)" : "");
 
-        // 3. 실업급여 계산 (2026년 기준: 고용보험법 제45·46·50조, 시행령 제68조)
-        // 1일 상한: 기초일액 상한 113,500원(시행령 제68조, 2025. 12. 23. 개정) x 60% = 68,100원
-        // 1일 하한(8시간 기준): 최저임금 시간급 10,320원(고용노동부고시 제2025-47호) x 8시간 x 80% = 66,048원
+        // 3. 실업급여 (고용보험법 제45·46·50조, 시행령 제68조). 금액 기준은 #kiro-values(홈서버 '웹앱 값 지킴이'가 공식 자료로 확인)에서 옵니다.
+        // 1일 상한 = 시행령 제68조 기초일액 상한 x 60%
+        // 1일 하한 = 이직일 당시 최저임금 x 1일 소정근로시간(8시간 한도) x 80% (고용보험법 제45조제4항, 제46조)
         // 소정급여일수: 고용보험법 별표 1 (시행 2026. 9. 18.) - 장애인은 50세 이상과 같은 일수
         const UNEMP_DAYS = {
             under50: { under1: 120, '1to3': 150, '3to5': 180, '5to10': 210, over10: 240 },
@@ -1055,8 +1076,11 @@
             const avgDailyWage2 = (monthly * 3) / 91.25;
             dailyUnemp = avgDailyWage2 * 0.6;
             // 상한을 먼저 적용하고, 최저구직급여일액보다 낮으면 최저액 (법 제46조②: 최저액이 우선)
-            if (dailyUnemp > 68100) dailyUnemp = 68100;
-            if (dailyUnemp < 66048) dailyUnemp = 66048;
+            const KV = window.KIRO_V;
+            const hours = Math.min(8, parseInt((document.getElementById('workHours') || {}).value, 10) || 8);
+            const lowerLimit = Math.round(KV.min_wage * hours * 0.8);
+            if (dailyUnemp > KV.max_daily) dailyUnemp = KV.max_daily;
+            if (dailyUnemp < lowerLimit) dailyUnemp = lowerLimit;
 
             const group = (age >= 50 || disabled) ? 'over50' : 'under50';
             unempDays = UNEMP_DAYS[group][insPeriod] || 0;
@@ -1084,7 +1108,7 @@
     function copyResult() {
         const sev = document.getElementById('resSeverance') ? document.getElementById('resSeverance').innerText : '';
         const url = window.location.href;
-        const text = `[5인 미만 사업장 계산기]\n예상 퇴직금: ${sev}\n5인 미만 사업장도 퇴직금은 100% 법정보장됩니다!\n확인하기: ${url}`;
+        const text = `[5인 미만 사업장 계산기]\n예상 퇴직금: ${sev}\n5인 미만 사업장도 1년 이상, 주 15시간 이상 일했다면 퇴직금 대상입니다.\n확인하기: ${url}`;
         navigator.clipboard.writeText(text).then(() => {
             alert('계산 결과 링크가 복사되었습니다!');
         }).catch(() => {
@@ -1099,7 +1123,7 @@
             try {
                 await navigator.share({
                     title: '5인 미만 사업장 퇴직금/실업급여 계산기',
-                    text: `[5인 미만 사업장 계산기]\n예상 퇴직금: ${sev}\n5인 미만이어도 퇴직금은 100% 법정 보장됩니다!`,
+                    text: `[5인 미만 사업장 계산기]\n예상 퇴직금: ${sev}\n5인 미만 사업장도 1년 이상, 주 15시간 이상 일했다면 퇴직금 대상입니다.`,
                     url: url
                 });
             } catch (err) {

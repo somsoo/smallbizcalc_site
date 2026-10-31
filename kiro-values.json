@@ -1,0 +1,28 @@
+{
+ "app": "smallbizcalc_site",
+ "host": "smallbiz.enjoy-onepage.com",
+ "watch": false,
+ "status": "unverified",
+ "checked": "",
+ "soft_days": 60,
+ "hard_days": 120,
+ "grace_days": 31,
+ "hide": [],
+ "pages": [
+  "guide-no-annual-leave.html",
+  "guide-over50-disabled.html",
+  "guide-parttime-15h.html",
+  "guide-pre2013-rule.html",
+  "guide-under1-unemp.html",
+  "index.html",
+  "tenure-1year.html",
+  "tenure-2years.html",
+  "tenure-3years.html",
+  "tenure-5years.html",
+  "wage-min-2026.html"
+ ],
+ "values": {},
+ "sources": {},
+ "valid_until": "2026-12-31",
+ "note": "이 페이지의 금액·비율은 2026년 기준"
+}
